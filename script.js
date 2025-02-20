@@ -1,36 +1,43 @@
-import { MusicTools } from "./MusicTools";
+import { MusicTools } from "./MusicTools.js";
 
-function convertMidiToFrequency() {
+function convertMidiPitchToFrequency() {
   const midiPitch = document.getElementById("midiInput").value;
   const frequency = MusicTools.midiPitchToFrequency(midiPitch);
-  document.getElementById("freqResult");
+  document.getElementById("freqResult").innerText = frequency;
 }
 
-function convertFrequencyToMidi() {
+document
+  .getElementById("midiToFreq")
+  .addEventListener("click", convertMidiPitchToFrequency);
+
+function convertFrequencyToMidiPitch() {
   const frequency = document.getElementById("freqInput").value;
   const midiPitch = MusicTools.frequencyToMidiPitch(frequency);
-  document.getElementById("midiResult");
+  document.getElementById("midiResult").innerText = midiPitch;
 }
 
-function convertDbfsToLinear() {
+document
+  .getElementById("freqToMidi")
+  .addEventListener("click", convertFrequencyToMidiPitch);
+
+function convertDbfsToLinearAmplitude() {
   const dbfs = document.getElementById("dbfsInput").value;
-  const linear = MusicTools.dbfsToLinearAmplitude(dbfs);
-  document.getElementById("linearResult");
+  const linearAmp = MusicTools.dbfsToLinearAmplitude(dbfs);
+  document.getElementById("linearResult").innerText = linearAmp;
 }
 
-function convertLinearToDbfs() {
-  const linear = document.getElementById("linearInput").value;
-  const dbfs = MusicTools.linearAmplitudeTodBFS(linear);
-  document.getElementById("dbfsResult");
+document
+  .getElementById("dbfsToLinear")
+  .addEventListener("click", convertDbfsToLinearAmplitude);
+
+function convertLinearAmplitudeToDBFS() {
+  const linearAmp = document.getElementById("linearInput").value;
+  const dbfs = MusicTools.linearAmpTodBFS(linearAmp);
+  document.getElementById("dbfsResult").innerText = dbfs;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("midiToFreq");
-  document.addEventListener("click", convertMidiToFrequency);
-  document.getElementById("freqToMidi");
-  document.addEventListener("click", convertFrequencyToMidi);
-  document.getElementById("dbfsToLinear");
-  document.addEventListener("click", convertDbfsToLinear);
-  document.getElementById("linearToDbfs");
-  document.addEventListener("click", convertLinearToDbfs);
-});
+document
+  .getElementById("linearToDbfs")
+  .addEventListener("click", convertLinearAmplitudeToDBFS);
+
+//used chatGPT to check for mistakes
